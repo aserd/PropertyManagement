@@ -14,7 +14,7 @@
   <!-- Begin Header -->
   <div id="header">
 
-   Allieson Serd's Awesome Assignment 6 Property Management Page
+   Allieson Serd's Awesome Assignment 7 Property Management Page
 
   </div>
   <!-- End Header -->
@@ -25,6 +25,8 @@
 	
 		<%if current_user %>
 		
+			<%= link_to "Repair Requests", repair_requests_path%>
+			<%= link_to "Leases", leases_path%>
 			<%= link_to "Logout", logout_path%>
 		<% else %>
 			<%= link_to "Register", new_user_path%>

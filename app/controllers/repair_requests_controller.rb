@@ -2,7 +2,12 @@ class RepairRequestsController < ApplicationController
   # GET /repair_requests
   # GET /repair_requests.json
   def index
-    @repair_requests = RepairRequest.all
+	if current_user && (current_user.has_role? :manager) 
+		@repair_requests = RepairRequest.all
+	end 
+	if current_user && (current_user.has_role? :renter) 
+		@repair_requests = RepairRequest.where(:submitter_id => current_user)
+	end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,6 +46,7 @@ class RepairRequestsController < ApplicationController
   # POST /repair_requests.json
   def create
     @repair_request = RepairRequest.new(params[:repair_request])
+	
 
     respond_to do |format|
       if @repair_request.save
